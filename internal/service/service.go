@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/pkg/errors"
-	"go.uber.org/zap"
 
+	"github.com/YxTiBlya/ci-core/logger"
 	"github.com/YxTiBlya/ci-core/rabbitmq"
 )
 
@@ -14,17 +14,17 @@ type Relations struct {
 	ExecutorAPI ExecutorAPIClient
 }
 
-func New(cfg Config, log *zap.SugaredLogger, rel Relations) *Service {
+func New(cfg Config, rel Relations) *Service {
 	return &Service{
 		cfg:       cfg,
-		log:       log,
+		log:       logger.New("service"),
 		Relations: rel,
 	}
 }
 
 type Service struct {
 	cfg Config
-	log *zap.SugaredLogger
+	log *logger.Logger
 	Relations
 }
 
@@ -47,5 +47,6 @@ func (svc *Service) Start(ctx context.Context) error {
 }
 
 func (svc *Service) Stop(ctx context.Context) error {
+	svc.log.Sync()
 	return nil
 }

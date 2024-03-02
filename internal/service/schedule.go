@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 
 	amqp "github.com/rabbitmq/amqp091-go"
-	"go.uber.org/zap"
 
 	"github.com/YxTiBlya/ci-api/pkg/executor"
 	"github.com/YxTiBlya/ci-monitor/pkg/models"
@@ -13,26 +12,27 @@ import (
 
 func (svc *Service) Schedule(msgs <-chan amqp.Delivery) {
 	for b := range msgs {
-		svc.log.Infof("Received a message: %s", b.Body)
+		svc.log.Info().Str("body", string(b.Body)).Msg("Received message")
 
 		var msg models.QSPipelineMsg
 		if err := json.Unmarshal(b.Body, &msg); err != nil {
-			svc.log.Error("Failed to unmarshal message", zap.String("body", string(b.Body)), zap.Error(err))
+			svc.log.Error().Err(err).
+				Str("body", string(b.Body)).
+				Msg("Failed to unmarshal message")
 			continue
 		}
 
-		// for test
-		// TODO: how i can balance and use more executors?
+		// to nginx
 		for _, task := range msg.Pipeline {
 			resp, err := svc.ExecutorAPI.ExecuteTask(context.Background(), &executor.ExecuteRequest{
 				Repo: msg.Repo,
 				Cmd:  task.Command,
 			})
 			if err != nil {
-				svc.log.Error("Failed to execute task", zap.Error(err))
+				svc.log.Error().Err(err).Msg("Failed to execute task")
 				continue
 			}
-			svc.log.Info("Successfully executed task", zap.Any("resp", resp))
+			svc.log.Info().Str("resp", resp.String()).Msg("Executed task")
 		}
 	}
 }

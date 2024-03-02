@@ -1,7 +1,7 @@
-github.com/YxTiBlya/ci-api v0.0.0-20240229151048-0ba3f06b21d1 h1:e9WZCZ0wrW0M3scbBH9f6g4nSqcYXgKX/Ix9km0MAtI=
-github.com/YxTiBlya/ci-api v0.0.0-20240229151048-0ba3f06b21d1/go.mod h1:ZMpw0HAmqfr6S4gj4mzhgoa1uma+oOfp3e9RCouetTQ=
-github.com/YxTiBlya/ci-core v0.0.0-20240229151005-9ac402cead1b h1:EjPx6aOlqQxZ8LkV293sHcS9vnjjZX3GECW17GgQbHA=
-github.com/YxTiBlya/ci-core v0.0.0-20240229151005-9ac402cead1b/go.mod h1:bVrbBRV7jo04ZSytGT0BHMFUa6A3kB65WiBQXHiPTe0=
+github.com/YxTiBlya/ci-api v0.0.0-20240302155252-89fea7974773 h1:r0kt21f77SonEZNgpkwShg3YT8gypjUdZJEQAmQapnE=
+github.com/YxTiBlya/ci-api v0.0.0-20240302155252-89fea7974773/go.mod h1:ZMpw0HAmqfr6S4gj4mzhgoa1uma+oOfp3e9RCouetTQ=
+github.com/YxTiBlya/ci-core v0.0.0-20240302183901-806e7adde1f3 h1:WvpF+2widnRJ4XfMBFI/2FuW1mP16QivfHw6HWEAEaU=
+github.com/YxTiBlya/ci-core v0.0.0-20240302183901-806e7adde1f3/go.mod h1:bVrbBRV7jo04ZSytGT0BHMFUa6A3kB65WiBQXHiPTe0=
 github.com/YxTiBlya/ci-monitor v0.0.0-20240229151901-57d6057b47c2 h1:vbeMxN/Kg1jU3K6TQntDvjF1aVHNMTx/gmL37n1zBB4=
 github.com/YxTiBlya/ci-monitor v0.0.0-20240229151901-57d6057b47c2/go.mod h1:WIlOQhauzrPTrT/9at17SkQMpJ7wDgOeHnYTfFyzXEU=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=

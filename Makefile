@@ -1,5 +1,5 @@
-build-scheduler:
-	@cd ./scheduler && go build -o ../bin/scheduler ./cmd/main/main.go
+build:
+	@go build -o ./bin/scheduler ./cmd/main/main.go
 
-run-scheduler: build-scheduler
+run: build
 	@./bin/scheduler --cfg config.yaml
