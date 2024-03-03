@@ -2,29 +2,33 @@ package service
 
 import (
 	"context"
+	"sync"
 
 	"github.com/pkg/errors"
-	"go.uber.org/zap"
 
+	"github.com/YxTiBlya/ci-core/logger"
 	"github.com/YxTiBlya/ci-core/rabbitmq"
 )
 
 type Relations struct {
 	QS          QueryService
 	ExecutorAPI ExecutorAPIClient
+	DB          DB
 }
 
-func New(cfg Config, log *zap.SugaredLogger, rel Relations) *Service {
+func New(cfg Config, rel Relations) *Service {
 	return &Service{
 		cfg:       cfg,
-		log:       log,
+		log:       logger.New("service"),
+		wg:        sync.WaitGroup{},
 		Relations: rel,
 	}
 }
 
 type Service struct {
 	cfg Config
-	log *zap.SugaredLogger
+	log *logger.Logger
+	wg  sync.WaitGroup
 	Relations
 }
 
@@ -47,5 +51,7 @@ func (svc *Service) Start(ctx context.Context) error {
 }
 
 func (svc *Service) Stop(ctx context.Context) error {
+	svc.log.Sync()
+	svc.wg.Wait()
 	return nil
 }

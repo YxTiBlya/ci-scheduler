@@ -8,6 +8,8 @@ import (
 
 	"github.com/YxTiBlya/ci-api/pkg/executor"
 	"github.com/YxTiBlya/ci-core/rabbitmq"
+
+	"github.com/YxTiBlya/ci-scheduler/internal/service/dto"
 )
 
 type QueryService interface {
@@ -17,4 +19,8 @@ type QueryService interface {
 
 type ExecutorAPIClient interface {
 	ExecuteTask(ctx context.Context, in *executor.ExecuteRequest, opts ...grpc.CallOption) (*executor.ExecuteResponse, error)
+}
+
+type DB interface {
+	InsertPipline(ctx context.Context, data *dto.TaskData) error
 }
