@@ -1,6 +1,13 @@
 scheduler:
   grpc_executor_address: "localhost:8000"
 qs_name: "reposiroties"
+db:
+  host: localhost
+  port: 5432
+  user: postgres
+  password: secret
+  name: db
+  ssl: false
 rabbitmq:
   host: "localhost"
   port: 5672

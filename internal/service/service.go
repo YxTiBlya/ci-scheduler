@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"sync"
 
 	"github.com/pkg/errors"
 
@@ -12,12 +13,14 @@ import (
 type Relations struct {
 	QS          QueryService
 	ExecutorAPI ExecutorAPIClient
+	DB          DB
 }
 
 func New(cfg Config, rel Relations) *Service {
 	return &Service{
 		cfg:       cfg,
 		log:       logger.New("service"),
+		wg:        sync.WaitGroup{},
 		Relations: rel,
 	}
 }
@@ -25,6 +28,7 @@ func New(cfg Config, rel Relations) *Service {
 type Service struct {
 	cfg Config
 	log *logger.Logger
+	wg  sync.WaitGroup
 	Relations
 }
 
@@ -48,5 +52,6 @@ func (svc *Service) Start(ctx context.Context) error {
 
 func (svc *Service) Stop(ctx context.Context) error {
 	svc.log.Sync()
+	svc.wg.Wait()
 	return nil
 }

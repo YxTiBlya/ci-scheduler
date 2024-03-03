@@ -1,0 +1,8 @@
+BEGIN;
+
+DROP TYPE IF EXISTS task_status_t;
+
+DROP TABLE IF EXISTS tasks;
+DROP TABLE IF EXISTS pipelines;
+
+COMMIT;
